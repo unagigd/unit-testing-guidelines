@@ -7,7 +7,7 @@
 		<title>Unit Tests</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/white.css">
+		<link rel="stylesheet" href="css/theme/black.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -181,7 +181,7 @@ describe('[subject]', () => {
 
 					<pre><code class="hljs" data-trim></code></pre>
 
-					<aside class="note">
+					<aside class="notes">
 						<p>Factories can:						
 							help reduce the setup code, 
 							make each test more readable, 
@@ -190,7 +190,7 @@ describe('[subject]', () => {
 				</section>
 					
 				<section>
-					<h3>Assertions should be situated in the unit tests</h3>
+					<h3>Assertions should be situated in the test body</h3>
 					
 					<aside class="notes">
 						<p>Rather that pulled to the separate method - It increases the readability</p>
@@ -269,6 +269,15 @@ describe('[subject]', () => {
 							it doesn’t prove anything clearly, and can severely inhibit your 
 							ability to refactor or alter your code in any way.</p>
 					</aside>
+				</section>
+
+				<section>
+					<h3>How many tests?</h3>
+
+					<blockquote class="fragment">
+							I get paid for code that works, not for tests, so my philosophy is to test as little as possible to reach a given level of confidence …
+							<br><cite>— Kent Beck on StackOverflow</cite>
+					</blockquote>
 				</section>
 
 				<section>
