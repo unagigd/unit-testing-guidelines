@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Unit Tests</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/white.css">
@@ -25,156 +25,261 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h2>Why Unit Tests?</h2>
-					<ul>
-						<li>Prevent production bugs - Improve developer productivity (long term) - Fixing bugs interrupts the normal flow of software development, which causes context switching</li>
-						<li>Design aid: Writing tests first gives you a clearer perspective on the ideal API design. it forces you to have a direction in mind before you start charging into the fray, and having a direction in mind leads to better designs</li>
-						<li>Feature documentation & test of developer understanding: The test should provide a clear description of the feature being tested.</li>
-					</ul>	
-					<p>It’s when you’re refactoring, i.e., restructuring a unit’s code but without meaning to change its behaviour. In this case, unit tests can often tell you if the unit’s behaviour has changed</p>				
-					<p>TDD is a robust way of designing software components (“units”) interactively so that their behaviour is specified through unit tests.</p>
-				</section>
-				<section>
-					<h2>How Unit Tests?</h2>
-					<p>Most developers seem to agree that testing is good, but developers frequently disagree about how to test.</p>
-				</section>
-				<section>
-					<h2>Approaches</h2>
-					<p>Testing state - involves performing an action on a unit and then checking that either an expected result was returned, or the state of the unit has been updated as expected. Testing state can be achieved regardless of if you are white box or black box testing.</p>
-					<p>Testing implementation is an extension to white box testing where you check that certain methods are invoked or not during the execution of an action. Here you don’t assert any state, but instead verify that internal behavior is doing what is expected.</p>
-				</section>
-				<section>
-						<h2>The anatomy of a unit test</h2>
-
-						A single unit test that asserts state is typically made up of the following three stages:
+					<section>
+						<h2>Why we write Unit Tests?</h2>
+					</section>
+				
+					<section>
+						<h3>Prevent bugs</h3>
 						
-						‘Arrange’ gets everything ready to perform the test. This could be declaring variables, building required objects or setting the state of a unit based on the circumstances we want to test. Some or all of this step could take place in the SetUp method of the current unit testing fixture. For simple unit tests, this step may not be needed.
-						‘Act’ performs the action that we are testing on the unit.
-						‘Assert’ checks to see that the action performed correctly. We want to check that either the return value of a method call is expected, or the state of an object is as expected.
+						<aside class="notes">
+							Prevent bugs - Fixing bugs is context switching
+							but Unit tests only protect against bugs if the unit tests 
+							cover the scenario that cause the bug - myth of 100% coverage</p>
+							When you’re refactoring unit’s code but 
+							without meaning to change its behaviour. In this case, unit tests can often 
+							tell you if the unit’s behaviour has changed.
+							Communicate future DEV what not to break!
+						</aside>
+					</section>
+
+					<section>
+						<h3>Design aid</h3>
+	
+						<blockquote class="fragment">If I don’t use tests for design, I find myself writing code in a hurry, because I cannot keep all the details that I have in my mind for long. Instead TDD gives myself the pleasure to write code at my pace, with the ease of mind that I don’t risk to forget anything.</blockquote>
+						
+						<aside class="notes">								
+							<p>Design aid - Writing tests first gives you a clearer perspective on the ideal API design. 
+								It forces you to have a direction in mind before you start charging into the fray, 
+								and having a direction in mind leads to better designs</p>
+							<p>TDD is a robust way of designing software components (“units”) 
+								interactively so that their behaviour is specified through unit tests.</p>
+						</aside>
+					</section>
+
+					<section>
+						<h3>Documentation</h3>
+	
+						<aside class="notes">
+							It shows your understanding of a feature.
+							Unit tests contain a lot of knowledge about the behaviour of a single unit of code.
+							Documentation - The test should provide a clear description of the feature being tested.</p>
+						</aside>
+					</section>
+				</section>				
+
+				<section>
+					<h2>How to write Unit Tests?</h2>
+					<p class="fragment">Most developers seem to agree that testing is good, but they also frequently disagree about how to test.</p>
 				</section>
+
+				<section>
+					<h3>Approaches</h3>
+					<ul>
+						<li class="fragment">Testing state</li>
+						<li class="fragment">Testing implementation</li>
+					</ul>
+
+					<aside class="notes">
+						<p>Testing state - involves performing an action on a unit and then checking that 
+							either an expected result was returned, or the state of the unit has been 
+							updated as expected.</p>
+						<p>Testing implementation is an extension to white box testing where you check 
+							that certain methods are invoked or not during the execution of an action. 
+							Here you don’t assert any state, but instead verify that internal behavior is doing 
+							what is expected.</p>
+					</aside>
+				</section>
+
+				<section>
+						<h3>The anatomy of a good test</h3>
+						<ul>
+							<li class="fragment">Arrange</li>
+							<li class="fragment">Act</li>
+							<li class="fragment">Assert</li>
+						</ul>
+
+						<aside class="notes">
+							‘Arrange’ gets everything ready to perform the test. This could be declaring variables, building required objects or setting the state of a unit. For simple unit tests, this step may not be needed.
+							‘Act’ performs the action that we are testing on the unit/subject.
+							‘Assert’ checks to see that the action performed correctly. We want to check that either the return value of a method call is expected, or the state of an object is as expected.
+						</aside>
+				</section>
+
 				<section>
 					<h2>Guidelines</h2>
-					This could be a series of workshops.
-					The goal of these guidelines is to make your tests:
+					<ul>
+						<li class="fragment">Readable</li>
+						<li class="fragment">Maintainable</li>
+					</ul>
 
-Readable
-Maintainable
-Trustworthy
+					<aside class="notes">
+							This could be a series of workshops.
+							The goal of these guidelines is to make your tests:
+					</aside>
 				</section>
 
 				<section>
-					<h2>Make each test independent</h2>
-					<p>Order of test should not matter</p>
-					<p>Mock out all external services and state - but mock only those who can couse shared state/side effects</p>
+					<h3>Make each test independent</h3>
+
+					<aside class="notes">
+						<p>Order of test should not matter</p>
+						<p>Mock out all external services and state - but mock only those who can couse shared state/side effects</p>
+					</aside>
 				</section>
 
 				<section>
-					<h2>Don't make unnecessary assertions</h2>
-					<p>Keep the number of assertions per unit test to a minimum. 
-						A single unit test is testing one thing. 
-						Multiple assertions in a single test are fine, 
-						but if it’s logical to split the assertions into separate tests, 
-						then it’s best to do so.</p>
-						<p>Sometimes, TDD folks express this by saying "*have only one logical assertion per test*". Remember, unit tests are a design specification of how a certain behaviour should work, not a list of observations of *everything* the code happens to do.</p>
+					<h3>Don't make unnecessary assertions</h3>
 
+					<aside class="notes">
+							<p>Keep the number of assertions per unit test to a minimum. 
+									A single unit test should test one thing.</p>
+									<p>"have only one logical assertion per test". Remember, unit tests are a design specification of how a certain behaviour should work, not a list of observations of *everything* the code happens to do.</p>		
+					</aside>
 				</section>
 
 				<section>
-					<h2>Avoid unnecessary preconditions</h2>
-					<p>Avoid having common setup code that runs at the beginning of lots of unrelated tests. Otherwise, it's unclear what assumptions each test relies on, and indicates that you're not testing just a single unit.</p>
+					<h3>Avoid unnecessary preconditions</h3>
+					
+					<aside class="notes">
+						Avoid having common setup code that runs at the beginning of lots of unrelated tests. 
+						Otherwise, it's unclear what assumptions each test relies on.
+					</aside>
 				</section>
 
 				<section>
-					<h2>Name your unit tests clearly and consistently</h2>
-					<p>Tests names should be concise, explicit, descriptive</p>
-					<p>S/S/R - This name describes the **subject** (ProductController's Purchase action), the **scenario** (stock is zero), and the **result** (renders "out of stock" view).</p>
-					<pre><code>
-describe('[unit of work]', () => {
-	describe('when [scenario/context]', () => {
-		it('should [expected behaviour]', () => {
-		});
-	});
+					<h3>Name your unit tests clearly and consistently</h3>
+
+					<pre class="fragment"><code class="hljs" data-trim>
+describe('[subject]', () => {
+  describe('when [scenario/context]', () => {
+    it('should [expected behaviour/result]', () => {
+    });
+  });
 });
-
 					</code></pre>
+
+					<aside class="notes">
+						<p>Tests names should be concise, explicit, descriptive</p>
+						<p>S/S/R - This name describes the **subject** (ProductController's Purchase action), the **scenario** (stock is zero), and the **result** (renders "out of stock" view).</p>
+					</aside>
 				</section>
 
 				<section>
-					<h2>Assertions should be situated in the unit tests proper, rather than pulled out into helper methods.</h2>
-					<p>It increases the readability</p>
+					<h3>Avoid logic in your tests</h3>
+	
+					<aside class="notes">
+						<p>avoid loops and if conditionals</p>
+						<p>Conditionals: you don't know which path the test will take
+								Loops: you could be sharing state between tests</p>
+					</aside>
 				</section>
-
+				
 				<section>
-					<h2>Don't comment tests</h2>
-					<p>If they are unclear or complex it's better to remove them</p>
-				</section>
+					<h3>Consider using factory functions</h3>
 
-				<section>
-					<h2>Avoid logic in your tests</h2>
-					<p>avoid loops and if conditionals</p>
-					<p>Conditionals: you don't know which path the test will take
-							Loops: you could be sharing state between tests</p>
-				</section>
+					<pre><code class="hljs" data-trim></code></pre>
 
-				<section>
-					<h2>Consider using factory functions in the tests</h2>
-					<p>Factories can:
-
-							help reduce the setup code, especially if you use dependency injection
-							make each test more readable, since the creation is a single function call that can be in the test itself instead of the setup
+					<aside class="note">
+						<p>Factories can:						
+							help reduce the setup code, 
+							make each test more readable, 
 							provide flexibility when creating new instances (setting an initial state, for example)</p>
+					</aside>
+				</section>
+					
+				<section>
+					<h3>Assertions should be situated in the unit tests</h3>
+					
+					<aside class="notes">
+						<p>Rather that pulled to the separate method - It increases the readability</p>
+					</aside>
 				</section>
 
 				<section>
-					<h2>Know your tools</h2>
-					<p>fit, .only, different assertions</p>
+					<h3>Don't comment your tests</h3>
+
+					<aside class="notes">
+						<p>If they are unclear or complex it's better to remove them</p>
+					</aside>
 				</section>
 
 				<section>
-					<h2>Cover the general case and the edge cases</h2>
+					<h3>Know your tools</h3>
+
+					<aside class="notes">
+						<p>fit, .only, different assertions</p>
+					</aside>
 				</section>
 
 				<section>
-					<h2>Minimal and Meaningless data</h2>
-					<p>It's common to find unit tests in which the data passed to and expected from the subject appear like it might be special.</p>
+					<h3>Pay attention to readability of error messages</h3>
 				</section>
 
 				<section>
-					<h2>Keep the test suite consistent</h2>
-					<p>Specially for teams</p>
-					<p>Avoid Accidental Creativity - Interpreting the author's intent when reading a test is often made unnecessarily challenging when the structure and form of each test varies arbitrarily</p>
+					<h3>Cover the general case and the edge cases</h3>
 				</section>
 
 				<section>
-					<h2>Don't mock everything</h2>
-					<p>Don't mock what you don't own</p>
+					<h3>Minimal and Meaningless data</h3>
+
+					<aside class="notes">
+						<p>It's common to find unit tests in which the data passed to and expected 
+							from the subject appear like it might be special.</p>
+							Sometimes we repeat data structure from API
+					</aside>
 				</section>
 
 				<section>
-					<h2>Template</h2>
-					<pre><code>
-test('What component aspect are you testing?', assert => {
-	const actual = 'What is the actual output?';
-	const expected = 'What is the expected output?';
+					<h3>Keep the test suite consistent</h3>
 
-	assert.equal(actual, expected,
-		'What should the feature do?');
+					<aside class="notes">
+						<p>Specially for teams</p>
+						<p>Avoid Accidental Creativity - 
+							Interpreting the author's intent when reading a test is  
+							unnecessarily challenging when the structure and form of each test varies</p>
+					</aside>
+				</section>
 
-	assert.end();
-});
-					</code></pre>
-				</section>
 				<section>
-					<h2>Final thoughts</h2>
+					<h3>Test should answer 4 questions</h3>
+
+					<ul>
+						<li class="fragment">What component aspect are you testing?</li>
+						<li class="fragment">What should the feature do?</li>
+						<li class="fragment">What is the actual output?</li>
+						<li class="fragment">What is the expected output?</li>
+					</ul>
 				</section>
+
 				<section>
-					<h2>Any Unit Test is better than none?</h2>
-					<p>A suite of good unit tests is immensely valuable: it documents your design, and makes it easier to refactor and expand your code while retaining a clear overview of each component’s behaviour. However, a suite of bad unit tests is immensely painful: it doesn’t prove anything clearly, and can severely inhibit your ability to refactor or alter your code in any way.</p>
+					<h1>Final thoughts</h1>
 				</section>
+
 				<section>
-					<h2>Unit Tests vs Integration/Functional</h2>
-					<p>Proving that components X and Y both work independently doesn’t prove that they’re compatible with one another or configured correctly.</p>
-					<img src="https://cdn-images-1.medium.com/max/800/0*eCs8GoVZVksoQtQx.gif" alt="">
+					<h3>Is having any Unit Tests is better than having none?</h3>
+
+					<aside class="notes">
+						<p>A suite of good unit tests is immensely valuable: it documents your design, 
+							and makes it easier to refactor and expand your code while retaining a clear 
+							overview of each component’s behaviour. 
+							
+							However, a suite of bad unit tests is immensely painful: 
+							it doesn’t prove anything clearly, and can severely inhibit your 
+							ability to refactor or alter your code in any way.</p>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Unit Tests vs Integration/E2E</h3>
+
+					<blockquote>Proving that components X and Y both work independently doesn’t prove that they’re compatible with one another or configured correctly.</blockquote>
+					
+					<img class="fragment" src="https://cdn-images-1.medium.com/max/800/0*eCs8GoVZVksoQtQx.gif" alt="">
+				</section>
+
+				<section>
+					<h1>Thank you!</h1>
 				</section>
 			</div>
 		</div>
