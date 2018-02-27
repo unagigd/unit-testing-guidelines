@@ -123,6 +123,24 @@
 				<section>
 					<h3>Make each test independent</h3>
 
+					<pre class="fragment"><code class="hljs" data-trim>
+const props = {
+  onClick: spy(),
+};
+
+it('test 1', () => {
+  const component = shallow(<TestedComponent {...props} >);
+	
+  // assert that onClick was called once - success
+})
+
+it('test 2', () => {
+  const component = shallow(<TestedComponent {...props} >);
+
+  // assert that onClick was called once - error	
+})
+          </code></pre>
+
 					<aside class="notes">
 						<p>Order of test should not matter</p>
 						<p>Mock out all external services and state - but mock only those who can couse shared state/side effects</p>
@@ -132,10 +150,28 @@
 				<section>
 					<h3>Don't make unnecessary assertions</h3>
 
+          <pre class="fragment"><code class="hljs" data-trim>
+// bad
+it('test dividing the numbers', () => {
+  expect(divide(4,2)).to.equal(2)
+  expect(divide(1,0)).to.throw()
+})
+
+// much better :)
+it('should return proper value for non zero divisor', () => {
+  expect(divide(4,2)).to.equal(2)
+})
+
+it('should throw an error when divisor is zero', () => {
+  expect(divide(1,0)).to.throw()
+})
+          </code></pre>
+
 					<aside class="notes">
 							<p>Keep the number of assertions per unit test to a minimum. 
 									A single unit test should test one thing.</p>
-									<p>"have only one logical assertion per test". Remember, unit tests are a design specification of how a certain behaviour should work, not a list of observations of *everything* the code happens to do.</p>		
+									<p>"have only one logical assertion per test". Remember, unit tests are a design specification 
+                    of how a certain behaviour should work, not a list of observations of *everything* the code happens to do.</p>		
 					</aside>
 				</section>
 
@@ -149,7 +185,13 @@
 				</section>
 
 				<section>
-					<h3>Name your unit tests clearly and consistently</h3>
+          <h3>Name your unit tests clearly and consistently</h3>
+          
+          <pre class="fragment"><code data-trim>
+Article reducer
+  when the fetching failed
+    should return current state
+          </code></pre>
 
 					<pre class="fragment"><code class="hljs" data-trim>
 describe('[subject]', () => {
@@ -179,7 +221,21 @@ describe('[subject]', () => {
 				<section>
 					<h3>Consider using factory functions</h3>
 
-					<pre><code class="hljs" data-trim></code></pre>
+					<pre class="fragment"><code class="hljs" data-trim>
+let props;
+
+const getWrapper = () => shallow(<Component {...props} >);
+
+beforeEach(() => {
+  props = {};
+})
+
+it('should test with property set to value', () => {
+  props.property = 'value';
+
+  const wrapper = getWrapper();
+})
+          </code></pre>
 
 					<aside class="notes">
 						<p>Factories can:						
@@ -208,21 +264,37 @@ describe('[subject]', () => {
 				<section>
 					<h3>Know your tools</h3>
 
+          <pre class="fragment"><code class="hljs" data-trim>
+const props = {
+  spy: {},
+}
+
+expect(props.spy.calledOnce).to.equal(true);
+// AssertionError: expected undefined to equal true
+
+expect(props.spy).to.have.property('calledOnce', true);
+// AssertionError: expected {} to have a property 'calledOnce'
+          </code></pre>
+
 					<aside class="notes">
 						<p>fit, .only, different assertions</p>
 					</aside>
 				</section>
 
-				<section>
-					<h3>Pay attention to readability of error messages</h3>
-				</section>
-
-				<section>
+        <section>
 					<h3>Cover the general case and the edge cases</h3>
 				</section>
 
 				<section>
 					<h3>Minimal and Meaningless data</h3>
+
+          <pre class="fragment"><code class="hljs" data-trim>
+// to special
+const data = ['Red', 'Black', 'White'];
+
+// more generic
+const data = ['Item1', 'Item2', 'Item3'];
+          </code></pre>
 
 					<aside class="notes">
 						<p>It's common to find unit tests in which the data passed to and expected 
@@ -281,9 +353,9 @@ describe('[subject]', () => {
 				</section>
 
 				<section>
-					<h3>Unit Tests vs Integration/E2E</h3>
+					<h3>Unit Tests vs ...</h3>
 
-					<blockquote>Proving that components X and Y both work independently doesn’t prove that they’re compatible with one another or configured correctly.</blockquote>
+					<blockquote class="fragment">Proving that components X and Y both work independently doesn’t prove that they’re compatible with one another or configured correctly.</blockquote>
 					
 					<img class="fragment" src="https://cdn-images-1.medium.com/max/800/0*eCs8GoVZVksoQtQx.gif" alt="">
 				</section>
